@@ -39,6 +39,7 @@ public class TestUtils {
         private final int position;
         private final ViewAction viewAction;
         private final int viewId;
+        private HumanReadables Humaneadables; 
 
         private ActionOnItemViewAtPositionViewAction(int position,
                                                      @IdRes int viewId,
@@ -72,7 +73,7 @@ public class TestUtils {
                 throw (new PerformException.Builder()).withActionDescription(this.toString())
                         .withViewDescription(
 
-                                HumanReadables.describe(view))
+                                Humaneadables.describe(view))
                         .withCause(new IllegalStateException(
                                 "No view with id "
                                         + this.viewId

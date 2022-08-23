@@ -158,6 +158,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         Project project = new Project(1, "Projet Tartampion", 0xFFEADAD1);
         Project project1 = new Project(2, "Projet Lucidia", 0xFFEADAD1);
         Project project2 =new Project(3L, "Projet Circus", 0xFFA3CED2);
+
         projectRepository.insertProject(project);
         projectRepository.insertProject(project1);
         projectRepository.insertProject(project2);
