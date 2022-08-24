@@ -27,9 +27,15 @@ public class TaskRepository {
     public Task getTaskById(int id) {
         return db.getTaskById(id);
     }
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+
+    @Insert (onConflict = OnConflictStrategy.REPLACE)
     public void insertTask(Task task) {
          db.insertTask(task);
+    }
+    public void cleanTasks(List<Task> tasks) {
+        for (Task task : tasks) {
+            db.deleteTask(task);
+        }
     }
 
     public void insertAllTask(List<Task> tasks) {

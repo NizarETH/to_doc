@@ -1,6 +1,7 @@
 package com.cleanup.todoc.ui;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -151,6 +152,26 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
             }
         });
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+
+                Executors.newSingleThreadExecutor().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        tasks = (ArrayList<Task>) taskRepository.getAllTasks();
+                        updateTasks();
+                    }
+                });
+
+            }
+        }
+    }
+
 
     private void insertRandomTasks() {
 
