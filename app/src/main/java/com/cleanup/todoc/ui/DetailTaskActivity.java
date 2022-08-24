@@ -14,6 +14,7 @@ import com.cleanup.todoc.R;
 import com.cleanup.todoc.model.Task;
 import com.cleanup.todoc.repository.TaskRepository;
 
+import java.text.SimpleDateFormat;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
@@ -55,19 +56,21 @@ public class DetailTaskActivity extends FragmentActivity {
 
                 runOnUiThread(new Runnable() {
                     public void run() {
-                      //name_task.setText(nameTache);
 
                         name_task.setText(nameTache);
-                      //  name_task.getText().toString();
-
-                        date_task.setText(""+dateR);
-                        heure_task.setText(""+dateR);
-
                         name_projet.setText(nameProjet);
-                 //       name_projet.setHint(nameProjet);
-                  //      name_projet.getText().toString();
 
-                //        ts.setName(String.valueOf(name_task));
+                        SimpleDateFormat  date1 = new SimpleDateFormat("dd/MM/yyyy");
+                        SimpleDateFormat  date2= new SimpleDateFormat("HH:mm:ss");
+
+                        date1.format(dateR);
+                        date_task.setText(""+date1);
+
+                        date2.format(dateR);
+                        heure_task.setText(""+date2);
+
+
+
 
                     }
                 });
@@ -82,7 +85,6 @@ public class DetailTaskActivity extends FragmentActivity {
 
 
                ts.setName((name_task.getText().toString()));
-             //   ts1.setCreationTimestamp(Long.parseLong("date_task"+"heure_task"));
                 Executors.newSingleThreadExecutor().execute(new Runnable() {
                     @Override
                     public void run() {
