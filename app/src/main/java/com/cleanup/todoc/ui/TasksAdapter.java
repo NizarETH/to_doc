@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cleanup.todoc.R;
 import com.cleanup.todoc.model.Project;
 import com.cleanup.todoc.model.Task;
+import com.cleanup.todoc.repository.ProjectRepository;
 
 import java.util.List;
 
@@ -174,11 +175,12 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
         void bind(Task task) {
             lblTaskName.setText(task.getName());
             imgDelete.setTag(task);
-
-            final Project taskProject = Project.getProjectById(task.getProject().getId());
-            if (taskProject != null) {
-                imgProject.setSupportImageTintList(ColorStateList.valueOf(taskProject.getColor()));
-                lblProjectName.setText(taskProject.getName());
+            ProjectRepository     projectRepository = new ProjectRepository(this);
+           Project projet= projectRepository.getProjectById((int) task.getProject().getId());
+          //  final Project taskProject = Project.getProjectById(task.getProject().getId());
+            if (projet != null) {
+                imgProject.setSupportImageTintList(ColorStateList.valueOf(projet.getColor()));
+                lblProjectName.setText(projet.getName());
             } else {
                 imgProject.setVisibility(View.INVISIBLE);
                 lblProjectName.setText("");

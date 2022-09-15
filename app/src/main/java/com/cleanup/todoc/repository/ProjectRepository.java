@@ -43,4 +43,5 @@ public class ProjectRepository {
     public void deleteProject(Project project) {
         db.deleteProject(project);
     }
+    public Project getProjectById(int id) { return db.getProjectById(id); }
 }

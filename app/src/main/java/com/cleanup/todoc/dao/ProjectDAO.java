@@ -8,6 +8,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.cleanup.todoc.model.Project;
+import com.cleanup.todoc.model.Task;
 
 import java.util.List;
 
@@ -20,6 +21,9 @@ public interface ProjectDAO {
 
     @Query("Select * from Project")
     List<Project> getAllProjects();
+
+    @Query("Select * from Project WHERE id = :myId ")
+    Project getProjectById(int myId);
 
 
     @Update

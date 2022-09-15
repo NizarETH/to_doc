@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.FragmentActivity;
@@ -25,7 +26,7 @@ public class DetailTaskActivity extends FragmentActivity {
     TaskRepository taskRepoy;
     TasksAdapter adap;
     Task ts;
-    updateCallBack callBack;
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -41,7 +42,7 @@ public class DetailTaskActivity extends FragmentActivity {
         final EditText name_task = findViewById(R.id.inom_tache);
         final EditText date_task = findViewById(R.id.idate_creationtache);
         final EditText heure_task = findViewById(R.id.iheure_creation);
-        final EditText name_projet = findViewById(R.id.inom_projet);
+        final TextView name_projet = findViewById(R.id.inom_projet);
 
         Button modif = findViewById(R.id.modif);
 
@@ -79,7 +80,7 @@ public class DetailTaskActivity extends FragmentActivity {
         });
 
         modif.setOnClickListener(new View.OnClickListener() {
-          //  Task ts1=ts;
+
             @Override
             public void onClick(View view) {
 
@@ -104,11 +105,5 @@ public class DetailTaskActivity extends FragmentActivity {
 
     }
 
-    public updateCallBack getCallBack() {
-        return callBack;
-    }
 
-    public void setCallBack(updateCallBack callBack) {
-        this.callBack = callBack;
-    }
 }
