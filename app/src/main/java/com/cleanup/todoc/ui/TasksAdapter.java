@@ -1,6 +1,7 @@
 package com.cleanup.todoc.ui;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Parcelable;
@@ -18,8 +19,9 @@ import com.cleanup.todoc.model.Project;
 import com.cleanup.todoc.model.Task;
 import com.cleanup.todoc.repository.ProjectRepository;
 
+import java.util.ArrayList;
 import java.util.List;
-
+import java.util.concurrent.Executors;
 
 
 /**
@@ -69,7 +71,14 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
 
     @Override
     public void onBindViewHolder(@NonNull final TaskViewHolder taskViewHolder, @SuppressLint("RecyclerView") final int position) {
-        taskViewHolder.bind(tasks.get(position));
+
+
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                taskViewHolder.bind(tasks.get(position), taskViewHolder.itemView.getContext());
+            }
+        });
 
         /** Ajout activité listage d'un détail d'une tâche
          * dans la page de détail
@@ -172,12 +181,12 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
          *
          * @param task the task to bind in the item view
          */
-        void bind(Task task) {
+        void bind(Task task, Context context) {
             lblTaskName.setText(task.getName());
             imgDelete.setTag(task);
-            ProjectRepository     projectRepository = new ProjectRepository(this);
+            ProjectRepository     projectRepository = new ProjectRepository(context);
            Project projet= projectRepository.getProjectById((int) task.getProject().getId());
-          //  final Project taskProject = Project.getProjectById(task.getProject().getId());
+
             if (projet != null) {
                 imgProject.setSupportImageTintList(ColorStateList.valueOf(projet.getColor()));
                 lblProjectName.setText(projet.getName());
